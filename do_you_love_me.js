@@ -8,11 +8,11 @@ const questionText = document.querySelector(".question");
 
 // 让"考虑考虑"按钮逃跑
 noBtn.addEventListener("mouseover", () => {
-  // const newX = Math.floor(Math.random() * questionContainer.offsetWidth);
-  // const newY = Math.floor(Math.random() * questionContainer.offsetWidth);
+  const newX = Math.floor(Math.random() * questionContainer.offsetWidth);
+  const newY = Math.floor(Math.random() * questionContainer.offsetWidth);
   
-  // noBtn.style.left = `${newX}px`;
-  // noBtn.style.top = `${newY}px`;
+  noBtn.style.left = `${newX}px`;
+  noBtn.style.top = `${newY}px`;
 });
 
 let resetTimeoutId = null; // 用来保存上一次的定时器 ID
@@ -27,7 +27,15 @@ noBtn.addEventListener("click", () => {
   if (resetTimeoutId) { // 先清除旧的定时器（如果有）
     clearTimeout(resetTimeoutId);
   }
-  questionText.textContent = "没点到😏";
+  // 文本池：你可以继续添加更多“调皮”的话
+  const messages = [
+    "没点到😏",
+    "再试试?😜",
+    "你真的确定吗?🙃",
+    "嘿嘿点不到~🐰"
+  ];
+  questionText.textContent = messages[Math.floor(Math.random() * messages.length)];
+
   // 设置新的定时器，并保存 ID
   resetTimeoutId = setTimeout(() => {
     questionText.textContent = "Do you love me?";
