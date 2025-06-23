@@ -1,15 +1,11 @@
 const questionContainer = document.querySelector(".question-container");
-const resultContainer = document.querySelector(".result-container.yes");
+const resultContainer = document.querySelector(".result-container");
 const gifResult = document.querySelector(".gif-result");
 const heartLoader = document.querySelector(".cssload-main");
 const yesBtn = document.querySelector(".js-yes-btn");
 const noBtn = document.querySelector(".js-no-btn");
-const bgMusic = document.getElementById("bgMusic");
 
-// 点击任意位置开始播放音乐
-document.addEventListener('click', () => {
-  bgMusic.play();
-}, { once: true });
+
 
 // 让"考虑考虑"按钮逃跑
 noBtn.addEventListener("mouseover", () => {
@@ -20,28 +16,29 @@ noBtn.addEventListener("mouseover", () => {
   noBtn.style.top = `${newY}px`;
 });
 
+// 万一点击到了"我不愿意"按钮
+noBtn.addEventListener("click", () => {
+  const newX = Math.floor(Math.random() * questionContainer.offsetWidth);
+  const newY = Math.floor(Math.random() * questionContainer.offsetWidth);
+  
+  noBtn.style.left = `${newX}px`;
+  noBtn.style.top = `${newY}px`;
+});
+
+
 // 点击"我愿意"按钮
 yesBtn.addEventListener("click", () => {
   questionContainer.style.display = "none";
-  heartLoader.style.display = "inherit";
+  heartLoader.style.display = "block";
 
   const timeoutId = setTimeout(() => {
     heartLoader.style.display = "none";
-    resultContainer.style.display = "inherit";
+    resultContainer.style.display = "block";
+    gifResult.currentTime = 0; // 从头播放
     gifResult.play();
   }, 3000);
 });
 
-// 简单的烟花效果
-function createFireworks() {
-  const fireworks = document.createElement('div');
-  fireworks.className = 'fireworks';
-  document.body.appendChild(fireworks);
-  
-  setTimeout(() => {
-    fireworks.remove();
-  }, 5000);
-}
 
 // 移动端适配
 function checkMobile() {
