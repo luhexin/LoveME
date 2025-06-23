@@ -55,6 +55,8 @@ body {
   gap: 1.5rem;
 }
 .btn {
+  -webkit-tap-highlight-color: transparent;
+  outline: none; 
   position: absolute;
   border: none;
   border-radius: 50px;
